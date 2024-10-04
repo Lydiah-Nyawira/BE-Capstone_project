@@ -87,6 +87,7 @@ DATABASES = {
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
+        'HOST': 'Nyaw3ra.mysql.pythonanywhere-services.com',
         'PORT': '3306',
     }
 }
