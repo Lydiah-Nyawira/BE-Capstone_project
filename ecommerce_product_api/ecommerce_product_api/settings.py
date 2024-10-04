@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--*l8&c91u^4+ljxq7=@^(ab9^dpyfy-@q-6uo-p48gi-wm5(p_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['Nyaw3ra.pythonanywhere.com']
 
 
 # Application definition
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'users',
-    'Products',
+    'products',
     'orders',
     'reviews',
     'wishlist',
@@ -80,10 +80,15 @@ WSGI_APPLICATION = 'ecommerce_product_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+from decouple import config
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': 'Nyaw3ra.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
     }
 }
 
@@ -121,8 +126,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-
+import os
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -135,3 +142,20 @@ REST_FRAMEWORK = {
     ],
 }
 AUTH_USER_MODEL = 'users.User'
+
+# Security settings
+if DEBUG:
+    SECURE_SSL_REDIRECT = False  # Disable SSL redirection in development
+    SESSION_COOKIE_SECURE = False  # Disable secure cookies in development
+    CSRF_COOKIE_SECURE = False  # Disable secure CSRF cookies in development
+else:
+    SECURE_SSL_REDIRECT = True  # Enforce SSL in production
+    SESSION_COOKIE_SECURE = True  # Enforce secure cookies in production
+    CSRF_COOKIE_SECURE = True  # Enforce secure CSRF cookies in production
+    
+X_FRAME_OPTIONS = 'DENY'
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
