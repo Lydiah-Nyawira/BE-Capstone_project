@@ -25,7 +25,7 @@ class ProductSerializer(serializers.ModelSerializer):
         return data
 
     def create(self, validated_data):
-        category_name = validated_data.pop('category')  # Get category name
+        category_name = validated_data.pop('category').strip().lower()  # Get category name
         category, _ = Category.objects.get_or_create(name=category_name)  # Get or create category
 
         validated_data['owner'] = self.context['request'].user  # Set the owner from the request

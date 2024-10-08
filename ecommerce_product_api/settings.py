@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--*l8&c91u^4+ljxq7=@^(ab9^dpyfy-@q-6uo-p48gi-wm5(p_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['Nyaw3ra.pythonanywhere.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -87,9 +87,9 @@ DATABASES = {
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
-        'HOST': 'Nyaw3ra.mysql.pythonanywhere-services.com',
+        'HOST': 'localhost',
         'PORT': '3306',
-    }
+        }
 }
 
 
@@ -144,18 +144,18 @@ REST_FRAMEWORK = {
 AUTH_USER_MODEL = 'users.User'
 
 # Security settings
-if DEBUG:
-    SECURE_SSL_REDIRECT = False  # Disable SSL redirection in development
-    SESSION_COOKIE_SECURE = False  # Disable secure cookies in development
-    CSRF_COOKIE_SECURE = False  # Disable secure CSRF cookies in development
-else:
-    SECURE_SSL_REDIRECT = True  # Enforce SSL in production
-    SESSION_COOKIE_SECURE = True  # Enforce secure cookies in production
-    CSRF_COOKIE_SECURE = True  # Enforce secure CSRF cookies in production
+
+#SECURE_SSL_REDIRECT = False  # Disable SSL redirection in development
+#SESSION_COOKIE_SECURE = False  # Disable secure cookies in development
+#CSRF_COOKIE_SECURE = False  # Disable secure CSRF cookies in development
+#SECURE_SSL_REDIRECT = True  # Enforce SSL in production
+#SESSION_COOKIE_SECURE = True  # Enforce secure cookies in production
+#CSRF_COOKIE_SECURE = True  # Enforce secure CSRF cookies in production
     
-X_FRAME_OPTIONS = 'DENY'
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
+#X_FRAME_OPTIONS = 'DENY'
+#SECURE_BROWSER_XSS_FILTER = True
+#SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_SSL_REDIRECT = False
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/home/Nyaw3ra/BE-Capstone_project/media'
