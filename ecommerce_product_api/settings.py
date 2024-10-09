@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--*l8&c91u^4+ljxq7=@^(ab9^dpyfy-@q-6uo-p48gi-wm5(p_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['Nyaw3ra.pythonanywhere.com']
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'orders',
     'reviews',
     'wishlist',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -80,18 +81,12 @@ WSGI_APPLICATION = 'ecommerce_product_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-from decouple import config
 DATABASES = {
-'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '3306',
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -126,7 +121,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-import os
+
 STATIC_URL = 'static/'
 STATIC_ROOT = '/home/Nyaw3ra/BE-Capstone_project/static'
 
@@ -151,7 +146,7 @@ AUTH_USER_MODEL = 'users.User'
 #SECURE_SSL_REDIRECT = True  # Enforce SSL in production
 #SESSION_COOKIE_SECURE = True  # Enforce secure cookies in production
 #CSRF_COOKIE_SECURE = True  # Enforce secure CSRF cookies in production
-    
+
 #X_FRAME_OPTIONS = 'DENY'
 #SECURE_BROWSER_XSS_FILTER = True
 #SECURE_CONTENT_TYPE_NOSNIFF = True
